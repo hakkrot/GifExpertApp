@@ -9,6 +9,15 @@ export const GifGrid = ({ category }) => {
     return (
         <>
             <h3>{ category }</h3>
+            {/*{*/}
+            {/*    isLoading*/}
+            {/*    ? ( <h2>Cargando...</h2> )*/}
+            {/*    : null // 'null' no se renderiza en React*/}
+            {/*}*/}
+
+            {
+                isLoading && ( <h2>Cargando...</h2> ) // es un 'and' logico
+            }
 
             <div className="card-grid">
                 { images.map( ( image ) => (
