@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {GifItem} from "./GifItem.jsx";
 import {useFetchGifs} from "../hooks/useFetchGifs.js";
 
 export const GifGrid = ({ category }) => {
 
-    const { images, isLoading } = useFetchGifs(category)
+    const { images: fetchedImages, isLoading } = useFetchGifs(category) //renombrando la propiedad images a fetchedImages
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        setImages(fetchedImages);
+    }, [fetchedImages]);
+
+    const onDeleteGifItem = (key) => {
+        setImages(prevImages => prevImages.filter(item => item.id !== key));
+    }
 
     return (
         <>
@@ -23,6 +32,7 @@ export const GifGrid = ({ category }) => {
                 { images.map( ( image ) => (
                         <GifItem
                             key={ image.id }
+                            onDeleteGifItem={onDeleteGifItem}
                             { ...image } // Esparcir el objeto imagen
                         />
                     )
