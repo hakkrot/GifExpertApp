@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {GifItem} from "./GifItem.jsx";
 import {useFetchGifs} from "../hooks/useFetchGifs.js";
 
@@ -11,9 +11,9 @@ export const GifGrid = ({ category }) => {
         setImages(fetchedImages);
     }, [fetchedImages]);
 
-    const onDeleteGifItem = (key) => {
+    const onDeleteGifItem = useCallback((key) => {
         setImages(prevImages => prevImages.filter(item => item.id !== key));
-    }
+    },[])
 
     return (
         <>
